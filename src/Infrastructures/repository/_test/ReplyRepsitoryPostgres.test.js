@@ -53,16 +53,22 @@ describe('ReplyRepositoryPostgres', () => {
         const newReply = {
           content: 'content',
           owner: 'user-123',
-          commentId: 'comment-123',
+          commentId: 'comment-123'
         };
 
         function fakeIdGenerator() {
+          return '123';
         }
 
         function fakeDateGenerator() {
+          return new Date('2021-08-08T07:22:33.555Z');
         }
 
-        const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, fakeIdGenerator, fakeDateGenerator);
+        const replyRepositoryPostgres = new ReplyRepositoryPostgres(
+          pool,
+          fakeIdGenerator,
+          fakeDateGenerator
+        );
 
         const addedReply = await replyRepositoryPostgres.addReply(newReply);
 
@@ -72,8 +78,8 @@ describe('ReplyRepositoryPostgres', () => {
           new AddedReply({
             id: 'reply-123',
             content: newReply.content,
-            owner: newReply.owner,
-          }),
+            owner: newReply.owner
+          })
         );
 
         expect(replies).toHaveLength(1);
@@ -89,7 +95,7 @@ describe('ReplyRepositoryPostgres', () => {
         await replyRepositoryPostgres.deleteReply('reply-123');
 
         const replies = await RepliesTableTestHelper.findReplyById('reply-123');
-        expect(replies[0].isDeleted).toEqual(true);
+        expect(replies[0].is_deleted).toEqual(true);
       });
 
       it('should throw NotFoundError when reply not found', async () => {
@@ -101,7 +107,9 @@ describe('ReplyRepositoryPostgres', () => {
 
     describe('getRepliesByThreadId function', () => {
       it('should return replies correctly', async () => {
-        await RepliesTableTestHelper.addReply({ id: 'reply-123', commentId: 'comment-123', content: 'content', owner: 'user-123', date: '2021-08-08' });
+        await RepliesTableTestHelper.addReply({
+          id: 'reply-123', commentId: 'comment-123', content: 'content', owner: 'user-123', date: '2021-08-08'
+        });
 
         const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {}, {});
 
@@ -117,7 +125,9 @@ describe('ReplyRepositoryPostgres', () => {
       });
 
       it('should return reply is deleted', async () => {
-        await RepliesTableTestHelper.addReply({ id: 'reply-123', commentId: 'comment-123', content: 'content', owner: 'user-123', date: '2021-08-08', isDeleted: true });
+        await RepliesTableTestHelper.addReply({
+          id: 'reply-123', commentId: 'comment-123', content: 'content', owner: 'user-123', date: '2021-08-08', isDeleted: true
+        });
 
         const replyRepositoryPostgres = new ReplyRepositoryPostgres(pool, {}, {});
 

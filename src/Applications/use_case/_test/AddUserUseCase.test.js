@@ -9,13 +9,13 @@ describe('AddUserUseCase', () => {
     const useCasePayload = {
       username: 'dicoding',
       password: 'secret',
-      fullname: 'Dicoding Indonesia',
+      fullname: 'Dicoding Indonesia'
     };
 
     const mockRegisteredUser = new RegisteredUser({
       id: 'user-123',
       username: useCasePayload.username,
-      fullname: useCasePayload.fullname,
+      fullname: useCasePayload.fullname
     });
 
     const mockUserRepository = new UserRepository();
@@ -30,7 +30,7 @@ describe('AddUserUseCase', () => {
 
     const getUserUseCase = new AddUserUseCase({
       userRepository: mockUserRepository,
-      passwordHash: mockPasswordHash,
+      passwordHash: mockPasswordHash
     });
 
     const registeredUser = await getUserUseCase.execute(useCasePayload);
@@ -38,7 +38,7 @@ describe('AddUserUseCase', () => {
     expect(registeredUser).toStrictEqual(new RegisteredUser({
       id: 'user-123',
       username: useCasePayload.username,
-      fullname: useCasePayload.fullname,
+      fullname: useCasePayload.fullname
     }));
 
     expect(mockUserRepository.verifyAvailableUsername).toBeCalledWith(useCasePayload.username);
@@ -46,7 +46,7 @@ describe('AddUserUseCase', () => {
     expect(mockUserRepository.addUser).toBeCalledWith(new RegisterUser({
       username: useCasePayload.username,
       password: 'encrypted_password',
-      fullname: useCasePayload.fullname,
+      fullname: useCasePayload.fullname
     }));
   });
 });

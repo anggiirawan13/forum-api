@@ -6,10 +6,10 @@ describe('JwtTokenManager', () => {
   describe('createAccessToken function', () => {
     it('should create accessToken correctly', async () => {
       const payload = {
-        username: 'dicoding',
+        username: 'dicoding'
       };
       const mockJwtToken = {
-        generate: jest.fn().mockImplementation(() => 'mock_token'),
+        generate: jest.fn().mockImplementation(() => 'mock_token')
       };
       const jwtTokenManager = new JwtTokenManager(mockJwtToken);
 
@@ -23,10 +23,10 @@ describe('JwtTokenManager', () => {
   describe('createRefreshToken function', () => {
     it('should create refreshToken correctly', async () => {
       const payload = {
-        username: 'dicoding',
+        username: 'dicoding'
       };
       const mockJwtToken = {
-        generate: jest.fn().mockImplementation(() => 'mock_token'),
+        generate: jest.fn().mockImplementation(() => 'mock_token')
       };
       const jwtTokenManager = new JwtTokenManager(mockJwtToken);
 
@@ -49,7 +49,8 @@ describe('JwtTokenManager', () => {
       const jwtTokenManager = new JwtTokenManager(Jwt.token);
       const refreshToken = await jwtTokenManager.createRefreshToken({ username: 'dicoding' });
 
-      await expect(jwtTokenManager.verifyRefreshToken(refreshToken)).resolves.not.toThrow(InvariantError);
+      await expect(jwtTokenManager.verifyRefreshToken(refreshToken))
+        .resolves.not.toThrow(InvariantError);
     });
   });
 

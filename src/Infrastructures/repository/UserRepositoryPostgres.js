@@ -12,13 +12,12 @@ class UserRepositoryPostgres extends UserRepository {
   async verifyAvailableUsername(username) {
     const query = {
       text: 'SELECT username FROM users WHERE username = $1',
-      values: [username],
+      values: [username]
     };
 
     const result = await this._pool.query(query);
 
-    if (result.rowCount)
-      throw new InvariantError('username tidak tersedia');
+    if (result.rowCount) throw new InvariantError('username tidak tersedia');
   }
 
   async addUser(registerUser) {
@@ -27,7 +26,7 @@ class UserRepositoryPostgres extends UserRepository {
 
     const query = {
       text: 'INSERT INTO users VALUES($1, $2, $3, $4) RETURNING id, username, fullname',
-      values: [id, username, password, fullname],
+      values: [id, username, password, fullname]
     };
 
     const result = await this._pool.query(query);
@@ -38,13 +37,12 @@ class UserRepositoryPostgres extends UserRepository {
   async getPasswordByUsername(username) {
     const query = {
       text: 'SELECT password FROM users WHERE username = $1',
-      values: [username],
+      values: [username]
     };
 
     const result = await this._pool.query(query);
 
-    if (!result.rowCount)
-      throw new InvariantError('username tidak ditemukan');
+    if (!result.rowCount) throw new InvariantError('username tidak ditemukan');
 
     return result.rows[0].password;
   }
@@ -52,13 +50,12 @@ class UserRepositoryPostgres extends UserRepository {
   async getIdByUsername(username) {
     const query = {
       text: 'SELECT id FROM users WHERE username = $1',
-      values: [username],
+      values: [username]
     };
 
     const result = await this._pool.query(query);
 
-    if (!result.rowCount)
-      throw new InvariantError('user tidak ditemukan');
+    if (!result.rowCount) throw new InvariantError('user tidak ditemukan');
 
     const { id } = result.rows[0];
 

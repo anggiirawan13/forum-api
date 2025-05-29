@@ -6,7 +6,7 @@ class LoginUserUseCase {
     userRepository,
     authenticationRepository,
     authenticationTokenManager,
-    passwordHash,
+    passwordHash
   }) {
     this._userRepository = userRepository;
     this._authenticationRepository = authenticationRepository;
@@ -30,7 +30,7 @@ class LoginUserUseCase {
 
     const newAuthentication = new NewAuthentication({
       accessToken,
-      refreshToken,
+      refreshToken
     });
 
     await this._authenticationRepository.addToken(newAuthentication.refreshToken);

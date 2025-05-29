@@ -6,7 +6,7 @@ describe('DetailComment entities', () => {
       content: 'abc',
       date: '2021-08-08T07:22:13.017Z',
       username: 'dicoding',
-      replies: [],
+      replies: []
     };
 
     expect(() => new DetailComment(payload)).toThrowError('DETAIL_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY');
@@ -19,7 +19,7 @@ describe('DetailComment entities', () => {
       date: '2021-08-08T07:22:13.017Z',
       username: 'dicoding',
       isDeleted: false,
-      replies: [],
+      replies: []
     };
 
     expect(() => new DetailComment(payload)).toThrowError('DETAIL_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
@@ -32,7 +32,7 @@ describe('DetailComment entities', () => {
       date: '2021-08-08T07:22:13.017Z',
       username: 'dicoding',
       isDeleted: false,
-      replies: [],
+      replies: []
     };
 
     const detailComment = new DetailComment(payload);

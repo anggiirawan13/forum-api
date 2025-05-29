@@ -2,19 +2,19 @@ const ServerTestHelper = {
   async getCredential({ server, username = 'dicoding' }) {
     const userPayload = {
       username,
-      password: 'secret',
+      password: 'secret'
     };
 
     const responseUser = await server.inject({
       method: 'POST',
       url: '/users',
-      payload: { ...userPayload, fullname: 'fullname' },
+      payload: { ...userPayload, fullname: 'fullname' }
     });
 
     const responseAuthentication = await server.inject({
       method: 'POST',
       url: '/authentications',
-      payload: { ...userPayload },
+      payload: { ...userPayload }
     });
 
     const user = JSON.parse(responseUser.payload);
@@ -22,9 +22,9 @@ const ServerTestHelper = {
 
     return {
       userId: user.data.addedUser.id,
-      accessToken: authentication.data.accessToken,
+      accessToken: authentication.data.accessToken
     };
-  },
+  }
 };
 
 module.exports = ServerTestHelper;

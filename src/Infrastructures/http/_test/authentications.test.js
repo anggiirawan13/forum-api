@@ -19,7 +19,7 @@ describe('/authentications endpoint', () => {
     it('should response 201 and new authentication', async () => {
       const requestPayload = {
         username: 'dicoding',
-        password: 'secret',
+        password: 'secret'
       };
       const server = await createServer(container);
       await server.inject({
@@ -28,14 +28,14 @@ describe('/authentications endpoint', () => {
         payload: {
           username: 'dicoding',
           password: 'secret',
-          fullname: 'Dicoding Indonesia',
-        },
+          fullname: 'Dicoding Indonesia'
+        }
       });
 
       const response = await server.inject({
         method: 'POST',
         url: '/authentications',
-        payload: requestPayload,
+        payload: requestPayload
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -48,14 +48,14 @@ describe('/authentications endpoint', () => {
     it('should response 400 if username not found', async () => {
       const requestPayload = {
         username: 'dicoding',
-        password: 'secret',
+        password: 'secret'
       };
       const server = await createServer(container);
 
       const response = await server.inject({
         method: 'POST',
         url: '/authentications',
-        payload: requestPayload,
+        payload: requestPayload
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -67,7 +67,7 @@ describe('/authentications endpoint', () => {
     it('should response 401 if password wrong', async () => {
       const requestPayload = {
         username: 'dicoding',
-        password: 'wrong_password',
+        password: 'wrong_password'
       };
       const server = await createServer(container);
       await server.inject({
@@ -76,14 +76,14 @@ describe('/authentications endpoint', () => {
         payload: {
           username: 'dicoding',
           password: 'secret',
-          fullname: 'Dicoding Indonesia',
-        },
+          fullname: 'Dicoding Indonesia'
+        }
       });
 
       const response = await server.inject({
         method: 'POST',
         url: '/authentications',
-        payload: requestPayload,
+        payload: requestPayload
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -94,14 +94,14 @@ describe('/authentications endpoint', () => {
 
     it('should response 400 if login payload not contain needed property', async () => {
       const requestPayload = {
-        username: 'dicoding',
+        username: 'dicoding'
       };
       const server = await createServer(container);
 
       const response = await server.inject({
         method: 'POST',
         url: '/authentications',
-        payload: requestPayload,
+        payload: requestPayload
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -113,14 +113,14 @@ describe('/authentications endpoint', () => {
     it('should response 400 if login payload wrong data type', async () => {
       const requestPayload = {
         username: 123,
-        password: 'secret',
+        password: 'secret'
       };
       const server = await createServer(container);
 
       const response = await server.inject({
         method: 'POST',
         url: '/authentications',
-        payload: requestPayload,
+        payload: requestPayload
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -139,16 +139,16 @@ describe('/authentications endpoint', () => {
         payload: {
           username: 'dicoding',
           password: 'secret',
-          fullname: 'Dicoding Indonesia',
-        },
+          fullname: 'Dicoding Indonesia'
+        }
       });
       const loginResponse = await server.inject({
         method: 'POST',
         url: '/authentications',
         payload: {
           username: 'dicoding',
-          password: 'secret',
-        },
+          password: 'secret'
+        }
       });
       const { data: { refreshToken } } = JSON.parse(loginResponse.payload);
 
@@ -156,8 +156,8 @@ describe('/authentications endpoint', () => {
         method: 'PUT',
         url: '/authentications',
         payload: {
-          refreshToken,
-        },
+          refreshToken
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -172,7 +172,7 @@ describe('/authentications endpoint', () => {
       const response = await server.inject({
         method: 'PUT',
         url: '/authentications',
-        payload: {},
+        payload: {}
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -188,8 +188,8 @@ describe('/authentications endpoint', () => {
         method: 'PUT',
         url: '/authentications',
         payload: {
-          refreshToken: 123,
-        },
+          refreshToken: 123
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -205,8 +205,8 @@ describe('/authentications endpoint', () => {
         method: 'PUT',
         url: '/authentications',
         payload: {
-          refreshToken: 'invalid_refresh_token',
-        },
+          refreshToken: 'invalid_refresh_token'
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -223,8 +223,8 @@ describe('/authentications endpoint', () => {
         method: 'PUT',
         url: '/authentications',
         payload: {
-          refreshToken,
-        },
+          refreshToken
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -244,8 +244,8 @@ describe('/authentications endpoint', () => {
         method: 'DELETE',
         url: '/authentications',
         payload: {
-          refreshToken,
-        },
+          refreshToken
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -261,8 +261,8 @@ describe('/authentications endpoint', () => {
         method: 'DELETE',
         url: '/authentications',
         payload: {
-          refreshToken,
-        },
+          refreshToken
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -277,7 +277,7 @@ describe('/authentications endpoint', () => {
       const response = await server.inject({
         method: 'DELETE',
         url: '/authentications',
-        payload: {},
+        payload: {}
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -293,8 +293,8 @@ describe('/authentications endpoint', () => {
         method: 'DELETE',
         url: '/authentications',
         payload: {
-          refreshToken: 123,
-        },
+          refreshToken: 123
+        }
       });
 
       const responseJson = JSON.parse(response.payload);

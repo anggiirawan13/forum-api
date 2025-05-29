@@ -6,5 +6,5 @@ module.exports = {
   register: async (server, { container }) => {
     const repliesHandler = new RepliesHandler(container);
     server.route(routes(repliesHandler));
-  },
+  }
 };

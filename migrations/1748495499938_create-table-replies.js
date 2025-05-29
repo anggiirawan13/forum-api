@@ -2,30 +2,30 @@ exports.up = (pgm) => {
   pgm.createTable('replies', {
     id: {
       type: 'VARCHAR(50)',
-      primaryKey: true,
+      primaryKey: true
     },
     comment_id: {
       type: 'VARCHAR(50)',
-      notNull: true,
+      notNull: true
     },
     content: {
       type: 'TEXT',
-      notNull: true,
+      notNull: true
     },
     date: {
       type: 'TEXT',
       notNull: true,
-      default: pgm.func('current_timestamp'),
+      default: pgm.func('current_timestamp')
     },
     owner: {
       type: 'VARCHAR(50)',
-      notNull: true,
+      notNull: true
     },
     is_deleted: {
       type: 'BOOLEAN',
       notNull: true,
-      default: false,
-    },
+      default: false
+    }
   });
 
   pgm.addConstraint('replies', 'fk_replies.comment_id_comments.id', 'FOREIGN KEY(comment_id) REFERENCES comments(id) ON DELETE CASCADE');

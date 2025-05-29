@@ -15,8 +15,8 @@ class CommentsHandler {
     const response = h.response({
       status: 'success',
       data: {
-        addedComment,
-      },
+        addedComment
+      }
     });
 
     response.code(201);
@@ -30,7 +30,7 @@ class CommentsHandler {
     await deleteCommentUseCase.execute(request.params, owner);
 
     const response = h.response({
-      status: 'success',
+      status: 'success'
     });
 
     response.code(200);

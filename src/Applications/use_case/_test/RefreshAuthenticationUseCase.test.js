@@ -14,7 +14,7 @@ describe('RefreshAuthenticationUseCase', () => {
 
   it('should throw error if refresh token not string', async () => {
     const useCasePayload = {
-      refreshToken: 1,
+      refreshToken: 1
     };
     const refreshAuthenticationUseCase = new RefreshAuthenticationUseCase({});
 
@@ -25,7 +25,7 @@ describe('RefreshAuthenticationUseCase', () => {
 
   it('should orchestrating the refresh authentication action correctly', async () => {
     const useCasePayload = {
-      refreshToken: 'some_refresh_token',
+      refreshToken: 'some_refresh_token'
     };
     const mockAuthenticationRepository = new AuthenticationRepository();
     const mockAuthenticationTokenManager = new AuthenticationTokenManager();
@@ -39,7 +39,7 @@ describe('RefreshAuthenticationUseCase', () => {
       .mockImplementation(() => Promise.resolve('some_new_access_token'));
     const refreshAuthenticationUseCase = new RefreshAuthenticationUseCase({
       authenticationRepository: mockAuthenticationRepository,
-      authenticationTokenManager: mockAuthenticationTokenManager,
+      authenticationTokenManager: mockAuthenticationTokenManager
     });
 
     const accessToken = await refreshAuthenticationUseCase.execute(useCasePayload);

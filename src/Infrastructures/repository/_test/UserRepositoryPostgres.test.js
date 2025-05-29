@@ -16,6 +16,7 @@ describe('UserRepositoryPostgres', () => {
 
   describe('verifyAvailableUsername function', () => {
     it('should throw InvariantError when username not available', async () => {
+      await UsersTableTestHelper.addUser({ username: 'dicoding' });
       const userRepositoryPostgres = new UserRepositoryPostgres(pool, {});
 
       await expect(userRepositoryPostgres.verifyAvailableUsername('dicoding')).rejects.toThrowError(InvariantError);
@@ -33,7 +34,7 @@ describe('UserRepositoryPostgres', () => {
       const registerUser = new RegisterUser({
         username: 'dicoding',
         password: 'secret_password',
-        fullname: 'Dicoding Indonesia',
+        fullname: 'Dicoding Indonesia'
       });
       const fakeIdGenerator = () => '123';
       const userRepositoryPostgres = new UserRepositoryPostgres(pool, fakeIdGenerator);
@@ -48,7 +49,7 @@ describe('UserRepositoryPostgres', () => {
       const registerUser = new RegisterUser({
         username: 'dicoding',
         password: 'secret_password',
-        fullname: 'Dicoding Indonesia',
+        fullname: 'Dicoding Indonesia'
       });
       const fakeIdGenerator = () => '123';
       const userRepositoryPostgres = new UserRepositoryPostgres(pool, fakeIdGenerator);
@@ -58,7 +59,7 @@ describe('UserRepositoryPostgres', () => {
       expect(registeredUser).toStrictEqual(new RegisteredUser({
         id: 'user-123',
         username: 'dicoding',
-        fullname: 'Dicoding Indonesia',
+        fullname: 'Dicoding Indonesia'
       }));
     });
   });
@@ -76,7 +77,7 @@ describe('UserRepositoryPostgres', () => {
       const userRepositoryPostgres = new UserRepositoryPostgres(pool, {});
       await UsersTableTestHelper.addUser({
         username: 'dicoding',
-        password: 'secret_password',
+        password: 'secret_password'
       });
 
       const password = await userRepositoryPostgres.getPasswordByUsername('dicoding');

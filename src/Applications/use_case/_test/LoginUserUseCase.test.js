@@ -9,11 +9,11 @@ describe('GetAuthenticationUseCase', () => {
   it('should orchestrating the get authentication action correctly', async () => {
     const useCasePayload = {
       username: 'dicoding',
-      password: 'secret',
+      password: 'secret'
     };
     const mockedAuthentication = new NewAuth({
       accessToken: 'access_token',
-      refreshToken: 'refresh_token',
+      refreshToken: 'refresh_token'
     });
     const mockUserRepository = new UserRepository();
     const mockAuthenticationRepository = new AuthenticationRepository();
@@ -42,14 +42,14 @@ describe('GetAuthenticationUseCase', () => {
       userRepository: mockUserRepository,
       authenticationRepository: mockAuthenticationRepository,
       authenticationTokenManager: mockAuthenticationTokenManager,
-      passwordHash: mockPasswordHash,
+      passwordHash: mockPasswordHash
     });
 
     const actualAuthentication = await loginUserUseCase.execute(useCasePayload);
 
     expect(actualAuthentication).toEqual(new NewAuth({
       accessToken: 'access_token',
-      refreshToken: 'refresh_token',
+      refreshToken: 'refresh_token'
     }));
     expect(mockUserRepository.getPasswordByUsername)
       .toBeCalledWith('dicoding');

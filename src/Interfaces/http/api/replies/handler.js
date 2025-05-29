@@ -13,8 +13,8 @@ class RepliesHandler {
     const response = h.response({
       status: 'success',
       data: {
-        addedReply,
-      },
+        addedReply
+      }
     });
 
     response.code(201);
@@ -27,7 +27,7 @@ class RepliesHandler {
     await deleteReplyUseCase.execute(request.params, owner);
 
     return {
-      status: 'success',
+      status: 'success'
     };
   }
 }

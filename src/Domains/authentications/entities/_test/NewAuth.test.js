@@ -3,7 +3,7 @@ const NewAuth = require('../NewAuth');
 describe('NewAuth entities', () => {
   it('should throw error when payload not contain needed property', () => {
     const payload = {
-      accessToken: 'accessToken',
+      accessToken: 'accessToken'
     };
 
     expect(() => new NewAuth(payload)).toThrowError('NEW_AUTH.NOT_CONTAIN_NEEDED_PROPERTY');
@@ -12,7 +12,7 @@ describe('NewAuth entities', () => {
   it('should throw error when payload not meet data type specification', () => {
     const payload = {
       accessToken: 'accessToken',
-      refreshToken: 1234,
+      refreshToken: 1234
     };
 
     expect(() => new NewAuth(payload)).toThrowError('NEW_AUTH.NOT_MEET_DATA_TYPE_SPECIFICATION');
@@ -21,7 +21,7 @@ describe('NewAuth entities', () => {
   it('should create NewAuth entities correctly', () => {
     const payload = {
       accessToken: 'accessToken',
-      refreshToken: 'refreshToken',
+      refreshToken: 'refreshToken'
     };
 
     const newAuth = new NewAuth(payload);

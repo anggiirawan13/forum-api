@@ -3,7 +3,7 @@ const InvariantError = require('./InvariantError');
 const DomainErrorTranslator = {
   translate(error) {
     return DomainErrorTranslator._directories[error.message] || error;
-  },
+  }
 };
 
 DomainErrorTranslator._directories = {
@@ -22,7 +22,7 @@ DomainErrorTranslator._directories = {
   'NEW_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY': new InvariantError('tidak dapat membuat komentar baru karena properti yang dibutuhkan tidak ada'),
   'NEW_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION': new InvariantError('tidak dapat membuat komentar baru karena tipe data tidak sesuai'),
   'NEW_REPLY.NOT_CONTAIN_NEEDED_PROPERTY': new InvariantError('tidak dapat membuat balasan baru karena properti yang dibutuhkan tidak ada'),
-  'NEW_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION': new InvariantError('tidak dapat membuat balasan baru karena tipe data tidak sesuai'),
+  'NEW_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION': new InvariantError('tidak dapat membuat balasan baru karena tipe data tidak sesuai')
 };
 
 module.exports = DomainErrorTranslator;

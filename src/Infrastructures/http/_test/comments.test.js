@@ -22,7 +22,7 @@ describe('Comments endpoints', () => {
   describe('when POST /threads/{threadId}/comments', () => {
     it('should response 201 and persisted comment', async () => {
       const requestPayload = {
-        content: 'content',
+        content: 'content'
       };
       const server = await createServer(container);
 
@@ -36,8 +36,8 @@ describe('Comments endpoints', () => {
         url: `/threads/${threadId}/comments`,
         payload: requestPayload,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -60,8 +60,8 @@ describe('Comments endpoints', () => {
         url: `/threads/${threadId}/comments`,
         payload: requestPayload,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -84,8 +84,8 @@ describe('Comments endpoints', () => {
         url: `/threads/${threadId}/comments`,
         payload: requestPayload,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -111,8 +111,8 @@ describe('Comments endpoints', () => {
         method: 'DELETE',
         url: `/threads/${threadId}/comments/${commentId}`,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -131,14 +131,14 @@ describe('Comments endpoints', () => {
       const commentId = 'comment-123';
       await CommentsTableTestHelper.addComment({ id: commentId, owner: firstUserId, threadId });
 
-      const { accessToken: secondAccessToken } = await ServerTestHelper.getCredential({ server, username: 'anggiirawan'});
+      const { accessToken: secondAccessToken } = await ServerTestHelper.getCredential({ server, username: 'anggiirawan' });
 
       const response = await server.inject({
         method: 'DELETE',
         url: `/threads/${threadId}/comments/${commentId}`,
         headers: {
-          Authorization: `Bearer ${secondAccessToken}`,
-        },
+          Authorization: `Bearer ${secondAccessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);

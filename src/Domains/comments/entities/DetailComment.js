@@ -7,7 +7,7 @@ class DetailComment {
       content,
       date,
       username,
-      is_deleted,
+      isDeleted,
       replies
     } = payload;
 
@@ -16,24 +16,26 @@ class DetailComment {
     this.date = date;
 
     this.username = username;
-    this.isDeleted = is_deleted;
+    this.isDeleted = isDeleted;
     this.replies = replies;
   }
 
   _verifyPayload(payload) {
-    if (this._isPayloadNotContainNeededProperty(payload))
-      throw new Error('DETAIL_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY');
+    if (this._isPayloadNotContainNeededProperty(payload)) throw new Error('DETAIL_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY');
 
-    if (this._isPayloadNotMeetDataTypeSpecification(payload))
-      throw new Error('DETAIL_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
+    if (this._isPayloadNotMeetDataTypeSpecification(payload)) throw new Error('DETAIL_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
   }
 
-  _isPayloadNotContainNeededProperty({ id, content, date, username, is_deleted, replies }) {
-    return !id || !content || !date || !username || is_deleted === undefined || !replies;
+  _isPayloadNotContainNeededProperty({
+    id, content, date, username, isDeleted, replies
+  }) {
+    return !id || !content || !date || !username || isDeleted === undefined || !replies;
   }
 
-  _isPayloadNotMeetDataTypeSpecification({ id, content, date, username, is_deleted, replies }) {
-    return typeof id !== 'string' || typeof content !== 'string' || typeof date !== 'string' || typeof username !== 'string' || typeof is_deleted !== 'boolean' || !Array.isArray(replies);
+  _isPayloadNotMeetDataTypeSpecification({
+    id, content, date, username, isDeleted, replies
+  }) {
+    return typeof id !== 'string' || typeof content !== 'string' || typeof date !== 'string' || typeof username !== 'string' || typeof isDeleted !== 'boolean' || !Array.isArray(replies);
   }
 }
 

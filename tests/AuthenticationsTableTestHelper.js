@@ -4,7 +4,7 @@ const AuthenticationsTableTestHelper = {
   async addToken(token) {
     const query = {
       text: 'INSERT INTO authentications VALUES($1)',
-      values: [token],
+      values: [token]
     };
 
     await pool.query(query);
@@ -13,7 +13,7 @@ const AuthenticationsTableTestHelper = {
   async findToken(token) {
     const query = {
       text: 'SELECT token FROM authentications WHERE token = $1',
-      values: [token],
+      values: [token]
     };
 
     const result = await pool.query(query);
@@ -23,7 +23,7 @@ const AuthenticationsTableTestHelper = {
 
   async cleanTable() {
     await pool.query('DELETE FROM authentications WHERE 1=1');
-  },
+  }
 };
 
 module.exports = AuthenticationsTableTestHelper;

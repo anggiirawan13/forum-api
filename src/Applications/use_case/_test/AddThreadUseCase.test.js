@@ -7,7 +7,7 @@ describe('AddThreadUseCase', () => {
   it('should orchestrating the add thread action correctly', async () => {
     const useCasePayload = {
       title: 'title',
-      body: 'body',
+      body: 'body'
     };
 
     const owner = 'user-123';
@@ -15,7 +15,7 @@ describe('AddThreadUseCase', () => {
     const expectedAddedThread = new AddedThread({
       id: 'thread-123',
       title: 'title',
-      owner: 'user-123',
+      owner: 'user-123'
     });
 
     const mockThreadRepository = new ThreadRepository();
@@ -24,8 +24,8 @@ describe('AddThreadUseCase', () => {
       new AddedThread({
         id: 'thread-123',
         title: 'title',
-        owner: 'user-123',
-      }),
+        owner: 'user-123'
+      })
     ));
 
     const addThreadUseCase = new AddThreadUseCase({ threadRepository: mockThreadRepository });
@@ -36,8 +36,8 @@ describe('AddThreadUseCase', () => {
       new NewThread({
         title: useCasePayload.title,
         body: useCasePayload.body,
-        owner: expectedAddedThread.owner,
-      }),
+        owner: expectedAddedThread.owner
+      })
     );
 
     expect(addedThread).toStrictEqual(expectedAddedThread);

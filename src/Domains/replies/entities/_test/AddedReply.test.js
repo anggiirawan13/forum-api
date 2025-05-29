@@ -1,10 +1,10 @@
-const AddedReply = require("../AddedReply");
+const AddedReply = require('../AddedReply');
 
 describe('AddedReply entities', () => {
   it('should throw error when payload not contain needed property', () => {
     const payload = {
       content: 'abc',
-      owner: 'user-123',
+      owner: 'user-123'
     };
 
     expect(() => new AddedReply(payload)).toThrowError('ADDED_REPLY.NOT_CONTAIN_NEEDED_PROPERTY');
@@ -14,7 +14,7 @@ describe('AddedReply entities', () => {
     const payload = {
       id: 123,
       content: 'abc',
-      owner: 'user-123',
+      owner: 'user-123'
     };
 
     expect(() => new AddedReply(payload)).toThrowError('ADDED_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION');
@@ -24,7 +24,7 @@ describe('AddedReply entities', () => {
     const payload = {
       id: 'reply-123',
       content: 'abc',
-      owner: 'user-123',
+      owner: 'user-123'
     };
 
     const addedReply = new AddedReply(payload);

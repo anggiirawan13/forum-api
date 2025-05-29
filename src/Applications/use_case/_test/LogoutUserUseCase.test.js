@@ -13,7 +13,7 @@ describe('LogoutUserUseCase', () => {
 
   it('should throw error if refresh token not string', async () => {
     const useCasePayload = {
-      refreshToken: 123,
+      refreshToken: 123
     };
     const logoutUserUseCase = new LogoutUserUseCase({});
 
@@ -24,7 +24,7 @@ describe('LogoutUserUseCase', () => {
 
   it('should orchestrating the delete authentication action correctly', async () => {
     const useCasePayload = {
-      refreshToken: 'refreshToken',
+      refreshToken: 'refreshToken'
     };
     const mockAuthenticationRepository = new AuthenticationRepository();
     mockAuthenticationRepository.checkAvailabilityToken = jest.fn()
@@ -33,7 +33,7 @@ describe('LogoutUserUseCase', () => {
       .mockImplementation(() => Promise.resolve());
 
     const logoutUserUseCase = new LogoutUserUseCase({
-      authenticationRepository: mockAuthenticationRepository,
+      authenticationRepository: mockAuthenticationRepository
     });
 
     await logoutUserUseCase.execute(useCasePayload);

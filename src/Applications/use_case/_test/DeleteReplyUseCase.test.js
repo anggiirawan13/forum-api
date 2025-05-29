@@ -4,7 +4,7 @@ const DeleteReplyUseCase = require('../DeleteReplyUseCase');
 describe('DeleteReplyUseCase', () => {
   it('should orchestrating the delete reply action correctly', async () => {
     const useCaseParam = {
-      replyId: 'reply-123',
+      replyId: 'reply-123'
     };
 
     const owner = 'user-123';
@@ -16,7 +16,7 @@ describe('DeleteReplyUseCase', () => {
     mockReplyRepository.deleteReply = jest.fn().mockImplementation(() => Promise.resolve());
 
     const deleteReplyUseCase = new DeleteReplyUseCase({
-      replyRepository: mockReplyRepository,
+      replyRepository: mockReplyRepository
     });
 
     await deleteReplyUseCase.execute(useCaseParam, owner);

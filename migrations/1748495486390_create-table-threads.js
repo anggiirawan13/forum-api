@@ -2,25 +2,25 @@ exports.up = (pgm) => {
   pgm.createTable('threads', {
     id: {
       type: 'VARCHAR(50)',
-      primaryKey: true,
+      primaryKey: true
     },
     title: {
       type: 'TEXT',
-      notNull: true,
+      notNull: true
     },
     body: {
       type: 'TEXT',
-      notNull: true,
+      notNull: true
     },
     owner: {
       type: 'VARCHAR(50)',
-      notNull: true,
+      notNull: true
     },
     date: {
       type: 'TEXT',
       notNull: true,
-      default: pgm.func('current_timestamp'),
-    },
+      default: pgm.func('current_timestamp')
+    }
   });
 
   pgm.addConstraint('threads', 'fk_threads.owner_users.id', 'FOREIGN KEY(owner) REFERENCES users(id) ON DELETE CASCADE');

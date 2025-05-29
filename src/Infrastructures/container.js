@@ -42,13 +42,13 @@ container.register([
     parameter: {
       dependencies: [
         {
-          concrete: pool,
+          concrete: pool
         },
         {
-          concrete: nanoid,
-        },
-      ],
-    },
+          concrete: nanoid
+        }
+      ]
+    }
   },
   {
     key: AuthenticationRepository.name,
@@ -56,10 +56,10 @@ container.register([
     parameter: {
       dependencies: [
         {
-          concrete: pool,
-        },
-      ],
-    },
+          concrete: pool
+        }
+      ]
+    }
   },
   {
     key: PasswordHash.name,
@@ -67,10 +67,10 @@ container.register([
     parameter: {
       dependencies: [
         {
-          concrete: bcrypt,
-        },
-      ],
-    },
+          concrete: bcrypt
+        }
+      ]
+    }
   },
   {
     key: AuthenticationTokenManager.name,
@@ -78,10 +78,10 @@ container.register([
     parameter: {
       dependencies: [
         {
-          concrete: Jwt.token,
-        },
-      ],
-    },
+          concrete: Jwt.token
+        }
+      ]
+    }
   },
   {
     key: ThreadRepository.name,
@@ -89,16 +89,16 @@ container.register([
     parameter: {
       dependencies: [
         {
-          concrete: pool,
+          concrete: pool
         },
         {
-          concrete: nanoid,
+          concrete: nanoid
         },
         {
-          concrete: date,
-        },
-      ],
-    },
+          concrete: date
+        }
+      ]
+    }
   },
   {
     key: CommentRepository.name,
@@ -106,16 +106,16 @@ container.register([
     parameter: {
       dependencies: [
         {
-          concrete: pool,
+          concrete: pool
         },
         {
-          concrete: nanoid,
+          concrete: nanoid
         },
         {
-          concrete: date,
-        },
-      ],
-    },
+          concrete: date
+        }
+      ]
+    }
   },
   {
     key: ReplyRepository.name,
@@ -123,17 +123,17 @@ container.register([
     parameter: {
       dependencies: [
         {
-          concrete: pool,
+          concrete: pool
         },
         {
-          concrete: nanoid,
+          concrete: nanoid
         },
         {
-          concrete: date,
-        },
-      ],
-    },
-  },
+          concrete: date
+        }
+      ]
+    }
+  }
 ]);
 
 container.register([
@@ -145,14 +145,14 @@ container.register([
       dependencies: [
         {
           name: 'userRepository',
-          internal: UserRepository.name,
+          internal: UserRepository.name
         },
         {
           name: 'passwordHash',
-          internal: PasswordHash.name,
-        },
-      ],
-    },
+          internal: PasswordHash.name
+        }
+      ]
+    }
   },
   {
     key: LoginUserUseCase.name,
@@ -162,22 +162,22 @@ container.register([
       dependencies: [
         {
           name: 'userRepository',
-          internal: UserRepository.name,
+          internal: UserRepository.name
         },
         {
           name: 'authenticationRepository',
-          internal: AuthenticationRepository.name,
+          internal: AuthenticationRepository.name
         },
         {
           name: 'authenticationTokenManager',
-          internal: AuthenticationTokenManager.name,
+          internal: AuthenticationTokenManager.name
         },
         {
           name: 'passwordHash',
-          internal: PasswordHash.name,
-        },
-      ],
-    },
+          internal: PasswordHash.name
+        }
+      ]
+    }
   },
   {
     key: LogoutUserUseCase.name,
@@ -187,10 +187,10 @@ container.register([
       dependencies: [
         {
           name: 'authenticationRepository',
-          internal: AuthenticationRepository.name,
-        },
-      ],
-    },
+          internal: AuthenticationRepository.name
+        }
+      ]
+    }
   },
   {
     key: RefreshAuthenticationUseCase.name,
@@ -200,14 +200,14 @@ container.register([
       dependencies: [
         {
           name: 'authenticationRepository',
-          internal: AuthenticationRepository.name,
+          internal: AuthenticationRepository.name
         },
         {
           name: 'authenticationTokenManager',
-          internal: AuthenticationTokenManager.name,
-        },
-      ],
-    },
+          internal: AuthenticationTokenManager.name
+        }
+      ]
+    }
   },
   {
     key: AddThreadUseCase.name,
@@ -217,10 +217,10 @@ container.register([
       dependencies: [
         {
           name: 'threadRepository',
-          internal: ThreadRepository.name,
-        },
-      ],
-    },
+          internal: ThreadRepository.name
+        }
+      ]
+    }
   },
   {
     key: AddCommentUseCase.name,
@@ -230,14 +230,14 @@ container.register([
       dependencies: [
         {
           name: 'threadRepository',
-          internal: ThreadRepository.name,
+          internal: ThreadRepository.name
         },
         {
           name: 'commentRepository',
-          internal: CommentRepository.name,
-        },
-      ],
-    },
+          internal: CommentRepository.name
+        }
+      ]
+    }
   },
   {
     key: AddReplyUseCase.name,
@@ -247,14 +247,14 @@ container.register([
       dependencies: [
         {
           name: 'commentRepository',
-          internal: CommentRepository.name,
+          internal: CommentRepository.name
         },
         {
           name: 'replyRepository',
-          internal: ReplyRepository.name,
-        },
-      ],
-    },
+          internal: ReplyRepository.name
+        }
+      ]
+    }
   },
   {
     key: DeleteCommentUseCase.name,
@@ -264,10 +264,10 @@ container.register([
       dependencies: [
         {
           name: 'commentRepository',
-          internal: CommentRepository.name,
-        },
-      ],
-    },
+          internal: CommentRepository.name
+        }
+      ]
+    }
   },
   {
     key: DeleteReplyUseCase.name,
@@ -277,10 +277,10 @@ container.register([
       dependencies: [
         {
           name: 'replyRepository',
-          internal: ReplyRepository.name,
-        },
-      ],
-    },
+          internal: ReplyRepository.name
+        }
+      ]
+    }
   },
   {
     key: GetThreadUseCase.name,
@@ -290,19 +290,19 @@ container.register([
       dependencies: [
         {
           name: 'threadRepository',
-          internal: ThreadRepository.name,
+          internal: ThreadRepository.name
         },
         {
           name: 'commentRepository',
-          internal: CommentRepository.name,
+          internal: CommentRepository.name
         },
         {
           name: 'replyRepository',
-          internal: ReplyRepository.name,
-        },
-      ],
-    },
-  },
+          internal: ReplyRepository.name
+        }
+      ]
+    }
+  }
 ]);
 
 module.exports = container;

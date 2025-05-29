@@ -52,7 +52,7 @@ describe('CommentRepositoryPostgres', () => {
         const newComment = new NewComment({
           content: 'content',
           owner: 'user-123',
-          threadId: 'thread-123',
+          threadId: 'thread-123'
         });
 
         function fakeIdGenerator() {
@@ -63,7 +63,11 @@ describe('CommentRepositoryPostgres', () => {
           this.toISOString = () => '2021-08-08';
         }
 
-        const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, fakeIdGenerator, fakeDateGenerator);
+        const commentRepositoryPostgres = new CommentRepositoryPostgres(
+          pool,
+          fakeIdGenerator,
+          fakeDateGenerator
+        );
 
         const addedComment = await commentRepositoryPostgres.addComment(newComment);
 
@@ -73,8 +77,8 @@ describe('CommentRepositoryPostgres', () => {
           new AddedComment({
             id: 'comment-123',
             content: newComment.content,
-            owner: newComment.owner,
-          }),
+            owner: newComment.owner
+          })
         );
 
         expect(comments).toHaveLength(1);
@@ -91,7 +95,7 @@ describe('CommentRepositoryPostgres', () => {
 
         const comments = await CommentsTableTestHelper.findCommentById('comment-123');
 
-        expect(comments[0].isDeleted).toEqual(true);
+        expect(comments[0].is_deleted).toEqual(true);
       });
 
       it('should throw NotFoundError when comment not found', async () => {
@@ -106,7 +110,7 @@ describe('CommentRepositoryPostgres', () => {
         const newComment = new NewComment({
           content: 'content',
           owner: 'user-123',
-          threadId: 'thread-123',
+          threadId: 'thread-123'
         });
 
         const detailComment = new DetailComment({
@@ -115,7 +119,7 @@ describe('CommentRepositoryPostgres', () => {
           date: '2021-08-08',
           username: 'dicoding',
           isDeleted: false,
-          replies: [],
+          replies: []
         });
 
         await CommentsTableTestHelper.addComment(newComment);
@@ -128,7 +132,9 @@ describe('CommentRepositoryPostgres', () => {
       });
 
       it('should return when comment is deleted', async () => {
-        await CommentsTableTestHelper.addComment({ id: 'comment-123', threadId: 'thread-123', owner: 'user-123', content: 'content', date: '2021-08-08', isDeleted: true });
+        await CommentsTableTestHelper.addComment({
+          id: 'comment-123', threadId: 'thread-123', owner: 'user-123', content: 'content', date: '2021-08-08', isDeleted: true
+        });
 
         const commentRepositoryPostgres = new CommentRepositoryPostgres(pool, {}, {});
 
@@ -140,7 +146,7 @@ describe('CommentRepositoryPostgres', () => {
           username: 'dicoding',
           date: '2021-08-08',
           isDeleted: true,
-          replies: [],
+          replies: []
         });
 
         expect(comments).toStrictEqual([expectedDetailComment]);

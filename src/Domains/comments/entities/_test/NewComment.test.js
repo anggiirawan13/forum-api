@@ -1,10 +1,10 @@
-const NewComment = require("../NewComment");
+const NewComment = require('../NewComment');
 
 describe('NewComment entities', () => {
   it('should throw error when payload not contain needed property', () => {
     const payload = {
       content: 'abc',
-      owner: 'user-123',
+      owner: 'user-123'
     };
 
     expect(() => new NewComment(payload)).toThrowError('NEW_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY');
@@ -14,7 +14,7 @@ describe('NewComment entities', () => {
     const payload = {
       threadId: 123,
       content: 'abc',
-      owner: 'user-123',
+      owner: 'user-123'
     };
 
     expect(() => new NewComment(payload)).toThrowError('NEW_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
@@ -24,7 +24,7 @@ describe('NewComment entities', () => {
     const payload = {
       threadId: 'thread-123',
       content: 'abc',
-      owner: 'user-123',
+      owner: 'user-123'
     };
 
     const newComment = new NewComment(payload);

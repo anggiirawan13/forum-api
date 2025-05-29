@@ -1,11 +1,11 @@
-const DetailReply = require("../DetailReply");
+const DetailReply = require('../DetailReply');
 
 describe('DetailReply entities', () => {
   it('should throw error when payload not contain needed property', () => {
     const payload = {
       content: 'abc',
       date: '2021-08-08T07:22:13.017Z',
-      username: 'dicoding',
+      username: 'dicoding'
     };
 
     expect(() => new DetailReply(payload)).toThrowError('DETAIL_REPLY.NOT_CONTAIN_NEEDED_PROPERTY');
@@ -18,7 +18,7 @@ describe('DetailReply entities', () => {
       content: 'abc',
       date: '2021-08-08T07:22:13.017Z',
       username: 'dicoding',
-      isDeleted: false,
+      isDeleted: false
     };
 
     expect(() => new DetailReply(payload)).toThrowError('DETAIL_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION');
@@ -31,7 +31,7 @@ describe('DetailReply entities', () => {
       content: 'abc',
       date: '2021-08-08T07:22:13.017Z',
       username: 'dicoding',
-      isDeleted: false,
+      isDeleted: false
     };
 
     const detailReply = new DetailReply(payload);

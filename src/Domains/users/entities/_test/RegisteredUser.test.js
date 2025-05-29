@@ -4,7 +4,7 @@ describe('a RegisteredUser entities', () => {
   it('should throw error when payload did not contain needed property', () => {
     const payload = {
       username: 'dicoding',
-      fullname: 'Dicoding Indonesia',
+      fullname: 'Dicoding Indonesia'
     };
 
     expect(() => new RegisteredUser(payload)).toThrowError('REGISTERED_USER.NOT_CONTAIN_NEEDED_PROPERTY');
@@ -14,7 +14,7 @@ describe('a RegisteredUser entities', () => {
     const payload = {
       id: 123,
       username: 'dicoding',
-      fullname: {},
+      fullname: {}
     };
 
     expect(() => new RegisteredUser(payload)).toThrowError('REGISTERED_USER.NOT_MEET_DATA_TYPE_SPECIFICATION');
@@ -24,7 +24,7 @@ describe('a RegisteredUser entities', () => {
     const payload = {
       id: 'user-123',
       username: 'dicoding',
-      fullname: 'Dicoding Indonesia',
+      fullname: 'Dicoding Indonesia'
     };
 
     const registeredUser = new RegisteredUser(payload);

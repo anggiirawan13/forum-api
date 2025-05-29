@@ -9,11 +9,9 @@ class AddedThread {
   }
 
   _verifyPayload(payload) {
-    if (this._isPayloadNotContainNeededProperty(payload))
-      throw new Error('ADDED_THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
+    if (this._isPayloadNotContainNeededProperty(payload)) { throw new Error('ADDED_THREAD.NOT_CONTAIN_NEEDED_PROPERTY'); }
 
-    if (this._isPayloadNotMeetDataTypeSpecification(payload))
-      throw new Error('ADDED_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
+    if (this._isPayloadNotMeetDataTypeSpecification(payload)) { throw new Error('ADDED_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION'); }
   }
 
   _isPayloadNotContainNeededProperty({ id, title, owner }) {

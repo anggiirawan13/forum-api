@@ -24,7 +24,7 @@ describe('Replies endpoints', () => {
   describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
     it('should response 201 and persisted reply', async () => {
       const requestPayload = {
-        content: 'content',
+        content: 'content'
       };
       const server = await createServer(container);
 
@@ -41,8 +41,8 @@ describe('Replies endpoints', () => {
         url: `/threads/${threadId}/comments/${commentId}/replies`,
         payload: requestPayload,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -68,8 +68,8 @@ describe('Replies endpoints', () => {
         url: `/threads/${threadId}/comments/${commentId}/replies`,
         payload: requestPayload,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -80,7 +80,7 @@ describe('Replies endpoints', () => {
 
     it('should response 400 when request payload not meet data type specification', async () => {
       const requestPayload = {
-        content: 123,
+        content: 123
       };
       const server = await createServer(container);
 
@@ -97,8 +97,8 @@ describe('Replies endpoints', () => {
         url: `/threads/${threadId}/comments/${commentId}/replies`,
         payload: requestPayload,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -109,7 +109,7 @@ describe('Replies endpoints', () => {
 
     it('should response 404 when thread not found', async () => {
       const requestPayload = {
-        content: 'content',
+        content: 'content'
       };
       const server = await createServer(container);
 
@@ -120,8 +120,8 @@ describe('Replies endpoints', () => {
         url: '/threads/thread-123/comments/comment-123/replies',
         payload: requestPayload,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -150,11 +150,12 @@ describe('Replies endpoints', () => {
         method: 'DELETE',
         url: `/threads/${threadId}/comments/${commentId}/replies/${replyId}`,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
+      console.log(responseJson);
       expect(response.statusCode).toEqual(200);
       expect(responseJson.status).toEqual('success');
     });
@@ -174,8 +175,8 @@ describe('Replies endpoints', () => {
         method: 'DELETE',
         url: `/threads/${threadId}/comments/${commentId}/replies/reply-123`,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -204,8 +205,8 @@ describe('Replies endpoints', () => {
         method: 'DELETE',
         url: `/threads/${threadId}/comments/${commentId}/replies/${replyId}`,
         headers: {
-          Authorization: `Bearer ${secondAccessToken}`,
-        },
+          Authorization: `Bearer ${secondAccessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);

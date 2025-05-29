@@ -18,8 +18,8 @@ class AuthenticationsHandler {
       status: 'success',
       data: {
         accessToken,
-        refreshToken,
-      },
+        refreshToken
+      }
     });
 
     response.code(201);
@@ -34,8 +34,8 @@ class AuthenticationsHandler {
     return {
       status: 'success',
       data: {
-        accessToken,
-      },
+        accessToken
+      }
     };
   }
 
@@ -43,7 +43,7 @@ class AuthenticationsHandler {
     const logoutUserUseCase = this._container.getInstance(LogoutUserUseCase.name);
     await logoutUserUseCase.execute(request.payload);
     return {
-      status: 'success',
+      status: 'success'
     };
   }
 }

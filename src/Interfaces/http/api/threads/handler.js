@@ -14,8 +14,8 @@ class ThreadsHandler {
     const response = h.response({
       status: 'success',
       data: {
-        addedThread,
-      },
+        addedThread
+      }
     });
 
     response.code(201);
@@ -29,8 +29,8 @@ class ThreadsHandler {
     return {
       status: 'success',
       data: {
-        thread,
-      },
+        thread
+      }
     };
   }
 }

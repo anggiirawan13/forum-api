@@ -25,7 +25,7 @@ describe('Threads endpoints', () => {
     it('should response 201 and persisted thread', async () => {
       const requestPayload = {
         title: 'title',
-        body: 'body',
+        body: 'body'
       };
       const server = await createServer(container);
 
@@ -36,8 +36,8 @@ describe('Threads endpoints', () => {
         url: '/threads',
         payload: requestPayload,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -48,7 +48,7 @@ describe('Threads endpoints', () => {
 
     it('should response 400 when request payload not contain needed property', async () => {
       const requestPayload = {
-        body: 'body',
+        body: 'body'
       };
       const server = await createServer(container);
 
@@ -59,8 +59,8 @@ describe('Threads endpoints', () => {
         url: '/threads',
         payload: requestPayload,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -72,14 +72,14 @@ describe('Threads endpoints', () => {
     it('should response 401 when request not contain access token', async () => {
       const requestPayload = {
         title: 'title',
-        body: 'body',
+        body: 'body'
       };
       const server = await createServer(container);
 
       const response = await server.inject({
         method: 'POST',
         url: '/threads',
-        payload: requestPayload,
+        payload: requestPayload
       });
 
       expect(response.statusCode).toEqual(401);
@@ -88,7 +88,7 @@ describe('Threads endpoints', () => {
     it('should response 400 when request payload not meet data type specification', async () => {
       const requestPayload = {
         title: ['title'],
-        body: 'body',
+        body: 'body'
       };
       const server = await createServer(container);
 
@@ -99,8 +99,8 @@ describe('Threads endpoints', () => {
         url: '/threads',
         payload: requestPayload,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -111,7 +111,7 @@ describe('Threads endpoints', () => {
 
     it('should response 400 when request payload not meet data structure specification', async () => {
       const requestPayload = {
-        title: 'title',
+        title: 'title'
       };
       const server = await createServer(container);
 
@@ -122,8 +122,8 @@ describe('Threads endpoints', () => {
         url: '/threads',
         payload: requestPayload,
         headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
       });
 
       const responseJson = JSON.parse(response.payload);
@@ -145,7 +145,7 @@ describe('Threads endpoints', () => {
 
       const response = await server.inject({
         method: 'GET',
-        url: `/threads/${threadId}`,
+        url: `/threads/${threadId}`
       });
 
       const responseJson = JSON.parse(response.payload);

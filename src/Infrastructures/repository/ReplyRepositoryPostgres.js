@@ -18,13 +18,12 @@ class ReplyRepositoryPostgres extends ReplyRepository {
       text: `SELECT replies.id FROM replies
              INNER JOIN comments ON replies.comment_id = comments.id
              WHERE replies.id = $1 AND comments.id = $2 AND comments.thread_id = $3`,
-      values: [replyId, commentId, threadId],
+      values: [replyId, commentId, threadId]
     };
 
     const result = await this._pool.query(query);
 
-    if (!result.rowCount)
-      throw new NotFoundError('balasan tidak ditemukan');
+    if (!result.rowCount) throw new NotFoundError('balasan tidak ditemukan');
   }
 
   async addReply(newReply) {
@@ -34,7 +33,7 @@ class ReplyRepositoryPostgres extends ReplyRepository {
 
     const query = {
       text: 'INSERT INTO replies VALUES($1, $2, $3, $4, $5) RETURNING id, content, owner',
-      values: [id, commentId, content, date, owner],
+      values: [id, commentId, content, date, owner]
     };
 
     const result = await this._pool.query(query);
@@ -43,14 +42,13 @@ class ReplyRepositoryPostgres extends ReplyRepository {
 
   async deleteReply(replyId) {
     const query = {
-      text: `UPDATE replies SET is_deleted = true WHERE id = $1 RETURNING id`,
-      values: [replyId],
+      text: 'UPDATE replies SET is_deleted = true WHERE id = $1 RETURNING id',
+      values: [replyId]
     };
 
     const result = await this._pool.query(query);
 
-    if (!result.rowCount)
-      throw new NotFoundError('balasan tidak ditemukan');
+    if (!result.rowCount) throw new NotFoundError('balasan tidak ditemukan');
   }
 
   async getRepliesByThreadId(threadId) {
@@ -60,27 +58,29 @@ class ReplyRepositoryPostgres extends ReplyRepository {
                     replies.content, 
                     replies.date, 
                     users.username,
-                    replies.is_deleted
+                    replies.is_deleted AS "isDeleted"
              FROM replies
              INNER JOIN comments ON replies.comment_id = comments.id
              INNER JOIN users ON replies.owner = users.id
              WHERE comments.thread_id = $1`,
-      values: [threadId],
+      values: [threadId]
     };
 
     const result = await this._pool.query(query);
-    return result.rows.map((row) => new DetailReply({ ...row, commentId: row.comment_id }));
+    return result.rows.map((row) => new DetailReply({
+      ...row,
+      commentId: row.comment_id
+    }));
   }
 
   async verifyReplyOwner(replyId, owner) {
     const query = {
       text: 'SELECT owner FROM replies WHERE id = $1 AND owner = $2',
-      values: [replyId, owner],
+      values: [replyId, owner]
     };
 
     const result = await this._pool.query(query);
-    if (!result.rowCount)
-      throw new AuthorizationError('anda bukan pemilik balasan ini');
+    if (!result.rowCount) throw new AuthorizationError('anda bukan pemilik balasan ini');
   }
 }
 

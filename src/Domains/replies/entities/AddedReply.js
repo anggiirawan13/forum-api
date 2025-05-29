@@ -10,13 +10,11 @@ class AddedReply {
   }
 
   _verifyPayload(payload) {
-    if (this._isPayloadNotContainNeededProperty(payload)) {
+    if (this._isPayloadNotContainNeededProperty(payload))
       throw new Error('ADDED_REPLY.NOT_CONTAIN_NEEDED_PROPERTY');
-    }
 
-    if (this._isPayloadNotMeetDataTypeSpecification(payload)) {
+    if (this._isPayloadNotMeetDataTypeSpecification(payload))
       throw new Error('ADDED_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION');
-    }
   }
 
   _isPayloadNotContainNeededProperty({ id, content, owner }) {

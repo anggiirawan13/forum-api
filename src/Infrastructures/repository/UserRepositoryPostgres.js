@@ -17,9 +17,8 @@ class UserRepositoryPostgres extends UserRepository {
 
     const result = await this._pool.query(query);
 
-    if (result.rowCount) {
+    if (result.rowCount)
       throw new InvariantError('username tidak tersedia');
-    }
   }
 
   async addUser(registerUser) {
@@ -44,9 +43,8 @@ class UserRepositoryPostgres extends UserRepository {
 
     const result = await this._pool.query(query);
 
-    if (!result.rowCount) {
+    if (!result.rowCount)
       throw new InvariantError('username tidak ditemukan');
-    }
 
     return result.rows[0].password;
   }
@@ -59,9 +57,8 @@ class UserRepositoryPostgres extends UserRepository {
 
     const result = await this._pool.query(query);
 
-    if (!result.rowCount) {
+    if (!result.rowCount)
       throw new InvariantError('user tidak ditemukan');
-    }
 
     const { id } = result.rows[0];
 

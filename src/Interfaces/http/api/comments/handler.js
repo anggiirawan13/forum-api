@@ -18,6 +18,7 @@ class CommentsHandler {
         addedComment,
       },
     });
+
     response.code(201);
     return response;
   }
@@ -31,6 +32,7 @@ class CommentsHandler {
     const response = h.response({
       status: 'success',
     });
+
     response.code(200);
     return response;
   }

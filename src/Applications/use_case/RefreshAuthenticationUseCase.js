@@ -22,13 +22,11 @@ class RefreshAuthenticationUseCase {
   _verifyPayload(payload) {
     const { refreshToken } = payload;
 
-    if (!refreshToken) {
+    if (!refreshToken)
       throw new Error('REFRESH_AUTHENTICATION_USE_CASE.NOT_CONTAIN_REFRESH_TOKEN');
-    }
 
-    if (typeof refreshToken !== 'string') {
+    if (typeof refreshToken !== 'string')
       throw new Error('REFRESH_AUTHENTICATION_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATION');
-    }
   }
 }
 

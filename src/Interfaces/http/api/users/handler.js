@@ -17,6 +17,7 @@ class UsersHandler {
         addedUser,
       },
     });
+
     response.code(201);
     return response;
   }

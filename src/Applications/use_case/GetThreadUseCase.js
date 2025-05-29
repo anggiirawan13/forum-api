@@ -11,15 +11,16 @@ class GetThreadUseCase {
     const comments = await this._commentRepository.getCommentsByThreadId(threadId);
     const replies = await this._replyRepository.getRepliesByThreadId(threadId);
 
-    thread.comments = comments.map(({ is_deleted, ...rest }) => (is_deleted ? { ...rest, content: '**komentar telah dihapus**' } : rest));
+    thread.comments = comments.map(({ isDeleted, ...rest }) => (isDeleted ? { ...rest, content: '**komentar telah dihapus**' } : rest));
 
     for (let i = 0; i < thread.comments.length; i += 1) {
       thread.comments[i].replies = replies
         .filter((reply) => reply.commentId === thread.comments[i].id)
         .map((reply) => {
-          const { commentId, is_deleted, ...rest } = reply;
-          return is_deleted ? { ...rest, content: '**balasan telah dihapus**' } : rest;
-        });
+          const { isDeleted, ...rest } = reply;
+          return isDeleted ? { ...rest, content: '**balasan telah dihapus**' } : rest;
+        })
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
     }
 
     return thread;

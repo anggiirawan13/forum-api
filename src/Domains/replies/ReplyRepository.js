@@ -1,22 +1,23 @@
 class ReplyRepository {
-  async checkReplyIsExist({ replyId, commentId, threadId }) {
+  async checkReplyIsExist() {
     throw new Error('REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  async addReply(newReply) {
+  async addReply() {
     throw new Error('REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  async deleteReply(replyId) {
+  async deleteReply() {
     throw new Error('REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  async getRepliesByThreadId(threadId) {
+  async getRepliesByThreadId() {
     throw new Error('REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
-  async verifyReplyOwner(replyId, owner) {
+  async verifyReplyOwner() {
     throw new Error('REPLY_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 }
+
 module.exports = ReplyRepository;

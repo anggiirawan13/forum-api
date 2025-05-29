@@ -17,11 +17,12 @@ class ThreadsHandler {
         addedThread,
       },
     });
+
     response.code(201);
     return response;
   }
 
-  async getThreadByIdHandler(request, h) {
+  async getThreadByIdHandler(request) {
     const getThreadUseCase = this._container.getInstance(GetThreadUseCase.name);
     const thread = await getThreadUseCase.execute(request.params);
 

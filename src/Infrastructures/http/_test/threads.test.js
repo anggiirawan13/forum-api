@@ -23,17 +23,14 @@ describe('Threads endpoints', () => {
 
   describe('when POST /threads', () => {
     it('should response 201 and persisted thread', async () => {
-      // Arrange
       const requestPayload = {
         title: 'title',
         body: 'body',
       };
       const server = await createServer(container);
 
-      /* add user to get access token */
       const { accessToken } = await ServerTestHelper.getCredential({ server });
 
-      // Action
       const response = await server.inject({
         method: 'POST',
         url: '/threads',
@@ -43,7 +40,6 @@ describe('Threads endpoints', () => {
         },
       });
 
-      // Assert
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(201);
       expect(responseJson.status).toEqual('success');
@@ -51,16 +47,13 @@ describe('Threads endpoints', () => {
     });
 
     it('should response 400 when request payload not contain needed property', async () => {
-      // Arrange
       const requestPayload = {
         body: 'body',
       };
       const server = await createServer(container);
 
-      /* add user to get access token */
       const { accessToken } = await ServerTestHelper.getCredential({ server });
 
-      // Action
       const response = await server.inject({
         method: 'POST',
         url: '/threads',
@@ -70,7 +63,6 @@ describe('Threads endpoints', () => {
         },
       });
 
-      // Assert
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
@@ -78,36 +70,30 @@ describe('Threads endpoints', () => {
     });
 
     it('should response 401 when request not contain access token', async () => {
-      // Arrange
       const requestPayload = {
         title: 'title',
         body: 'body',
       };
       const server = await createServer(container);
 
-      // Action
       const response = await server.inject({
         method: 'POST',
         url: '/threads',
         payload: requestPayload,
       });
 
-      // Assert
       expect(response.statusCode).toEqual(401);
     });
 
     it('should response 400 when request payload not meet data type specification', async () => {
-      // Arrange
       const requestPayload = {
         title: ['title'],
         body: 'body',
       };
       const server = await createServer(container);
 
-      /* add user to get access token */
       const { accessToken } = await ServerTestHelper.getCredential({ server });
 
-      // Action
       const response = await server.inject({
         method: 'POST',
         url: '/threads',
@@ -117,7 +103,6 @@ describe('Threads endpoints', () => {
         },
       });
 
-      // Assert
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
@@ -125,16 +110,13 @@ describe('Threads endpoints', () => {
     });
 
     it('should response 400 when request payload not meet data structure specification', async () => {
-      // Arrange
       const requestPayload = {
         title: 'title',
       };
       const server = await createServer(container);
 
-      /* add user to get access token */
       const { accessToken } = await ServerTestHelper.getCredential({ server });
 
-      // Action
       const response = await server.inject({
         method: 'POST',
         url: '/threads',
@@ -144,7 +126,6 @@ describe('Threads endpoints', () => {
         },
       });
 
-      // Assert
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');

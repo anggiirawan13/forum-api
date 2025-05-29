@@ -1,17 +1,12 @@
-/* istanbul ignore file */
-
 const { createContainer } = require('instances-container');
 
-// internal module
 const date = Date;
 
-// external agency
 const { nanoid } = require('nanoid');
 const bcrypt = require('bcrypt');
 const Jwt = require('@hapi/jwt');
 const pool = require('./database/postgres/pool');
 
-// service (repository, helper, manager, etc.)
 const UserRepository = require('../Domains/users/UserRepository');
 const UserRepositoryPostgres = require('./repository/UserRepositoryPostgres');
 const AuthenticationRepository = require('../Domains/authentications/AuthenticationRepository');
@@ -27,7 +22,6 @@ const CommentRepositoryPostgres = require('./repository/CommentRepositoryPostgre
 const ReplyRepository = require('../Domains/replies/ReplyRepository');
 const ReplyRepositoryPostgres = require('./repository/ReplyRepositoryPostgres');
 
-// use case
 const AddUserUseCase = require('../Applications/use_case/AddUserUseCase');
 const AddThreadUseCase = require('../Applications/use_case/AddThreadUseCase');
 const LoginUserUseCase = require('../Applications/use_case/LoginUserUseCase');
@@ -39,10 +33,8 @@ const DeleteCommentUseCase = require('../Applications/use_case/DeleteCommentUseC
 const DeleteReplyUseCase = require('../Applications/use_case/DeleteReplyUseCase');
 const GetThreadUseCase = require('../Applications/use_case/GetThreadUseCase');
 
-// creating container
 const container = createContainer();
 
-// registering services and repository
 container.register([
   {
     key: UserRepository.name,
@@ -144,7 +136,6 @@ container.register([
   },
 ]);
 
-// registering use cases
 container.register([
   {
     key: AddUserUseCase.name,

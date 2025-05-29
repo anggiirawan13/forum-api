@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 const pool = require('../src/Infrastructures/database/postgres/pool');
 
 const RepliesTableTestHelper = {
@@ -19,15 +18,6 @@ const RepliesTableTestHelper = {
 
     const result = await pool.query(query);
     return result.rows;
-  },
-
-  async deleteReplyById(id) {
-    const query = {
-      text: 'UPDATE replies SET is_deleted = true WHERE id = $1',
-      values: [id],
-    };
-
-    await pool.query(query);
   },
 
   async cleanTable() {

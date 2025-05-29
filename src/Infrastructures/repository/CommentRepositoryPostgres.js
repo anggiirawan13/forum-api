@@ -19,9 +19,8 @@ class CommentRepositoryPostgres extends CommentRepository {
     };
 
     const result = await this._pool.query(query);
-    if (!result.rowCount) {
+    if (!result.rowCount)
       throw new NotFoundError('komentar tidak ditemukan');
-    }
   }
 
   async addComment(newComment) {
@@ -45,9 +44,8 @@ class CommentRepositoryPostgres extends CommentRepository {
     };
 
     const result = await this._pool.query(query);
-    if (!result.rowCount) {
+    if (!result.rowCount)
       throw new NotFoundError('komentar tidak ditemukan');
-    }
   }
 
   async getCommentsByThreadId(threadId) {
@@ -74,9 +72,8 @@ class CommentRepositoryPostgres extends CommentRepository {
     };
 
     const result = await this._pool.query(query);
-    if (!result.rowCount) {
+    if (!result.rowCount)
       throw new AuthorizationError('anda bukan pemilik komentar ini');
-    }
   }
 }
 

@@ -21,6 +21,7 @@ class AuthenticationsHandler {
         refreshToken,
       },
     });
+
     response.code(201);
     return response;
   }

@@ -16,14 +16,16 @@ class RepliesHandler {
         addedReply,
       },
     });
+
     response.code(201);
     return response;
   }
 
-  async deleteReplyHandler(request, h) {
+  async deleteReplyHandler(request) {
     const { id: owner } = request.auth.credentials;
     const deleteReplyUseCase = this._container.getInstance(DeleteReplyUseCase.name);
     await deleteReplyUseCase.execute(request.params, owner);
+
     return {
       status: 'success',
     };

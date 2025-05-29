@@ -6,7 +6,6 @@ const AddReplyUseCase = require('../AddReplyUseCase');
 
 describe('AddReplyUseCase', () => {
   it('should orchestrating the add reply action correctly', async () => {
-    // Arrange
     const useCasePayload = {
       content: 'content',
     };
@@ -23,11 +22,9 @@ describe('AddReplyUseCase', () => {
       owner: 'user-123',
     });
 
-    /** creating dependency of use case */
     const mockCommentRepository = new CommentRepository();
     const mockReplyRepository = new ReplyRepository();
 
-    /** mocking needed function */
     mockCommentRepository.checkCommentIsExist = jest.fn().mockImplementation(() => Promise.resolve());
     mockReplyRepository.addReply = jest.fn().mockImplementation(() =>
       Promise.resolve(
@@ -39,16 +36,13 @@ describe('AddReplyUseCase', () => {
       ),
     );
 
-    /** creating use case instance */
     const addReplyUseCase = new AddReplyUseCase({
       commentRepository: mockCommentRepository,
       replyRepository: mockReplyRepository,
     });
 
-    // Action
     const addedReply = await addReplyUseCase.execute(useCasePayload, useCaseParam, owner);
 
-    // Assert
     expect(mockReplyRepository.addReply).toBeCalledWith(
       new NewReply({
         content: 'content',

@@ -23,9 +23,8 @@ class ReplyRepositoryPostgres extends ReplyRepository {
 
     const result = await this._pool.query(query);
 
-    if (!result.rowCount) {
+    if (!result.rowCount)
       throw new NotFoundError('balasan tidak ditemukan');
-    }
   }
 
   async addReply(newReply) {
@@ -50,9 +49,8 @@ class ReplyRepositoryPostgres extends ReplyRepository {
 
     const result = await this._pool.query(query);
 
-    if (!result.rowCount) {
+    if (!result.rowCount)
       throw new NotFoundError('balasan tidak ditemukan');
-    }
   }
 
   async getRepliesByThreadId(threadId) {
@@ -81,9 +79,8 @@ class ReplyRepositoryPostgres extends ReplyRepository {
     };
 
     const result = await this._pool.query(query);
-    if (!result.rowCount) {
+    if (!result.rowCount)
       throw new AuthorizationError('anda bukan pemilik balasan ini');
-    }
   }
 }
 

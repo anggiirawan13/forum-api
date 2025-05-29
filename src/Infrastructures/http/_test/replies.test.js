@@ -23,24 +23,19 @@ describe('Replies endpoints', () => {
 
   describe('when POST /threads/{threadId}/comments/{commentId}/replies', () => {
     it('should response 201 and persisted reply', async () => {
-      // Arrange
       const requestPayload = {
         content: 'content',
       };
       const server = await createServer(container);
 
-      /* add user to get access token */
       const { accessToken, userId } = await ServerTestHelper.getCredential({ server });
 
-      /* add thread to get thread id */
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
 
-      /* add comment to get comment id */
       const commentId = 'comment-123';
       await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: userId });
 
-      // Action
       const response = await server.inject({
         method: 'POST',
         url: `/threads/${threadId}/comments/${commentId}/replies`,
@@ -50,7 +45,6 @@ describe('Replies endpoints', () => {
         },
       });
 
-      // Assert
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(201);
       expect(responseJson.status).toEqual('success');
@@ -58,22 +52,17 @@ describe('Replies endpoints', () => {
     });
 
     it('should response 400 when request payload not contain needed property', async () => {
-      // Arrange
       const requestPayload = {};
       const server = await createServer(container);
 
-      /* add user to get access token */
       const { accessToken, userId } = await ServerTestHelper.getCredential({ server });
 
-      /* add thread to get thread id */
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
 
-      /* add comment to get comment id */
       const commentId = 'comment-123';
       await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: userId });
 
-      // Action
       const response = await server.inject({
         method: 'POST',
         url: `/threads/${threadId}/comments/${commentId}/replies`,
@@ -83,7 +72,6 @@ describe('Replies endpoints', () => {
         },
       });
 
-      // Assert
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
@@ -91,24 +79,19 @@ describe('Replies endpoints', () => {
     });
 
     it('should response 400 when request payload not meet data type specification', async () => {
-      // Arrange
       const requestPayload = {
         content: 123,
       };
       const server = await createServer(container);
 
-      /* add user to get access token */
       const { accessToken, userId } = await ServerTestHelper.getCredential({ server });
 
-      /* add thread to get thread id */
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
 
-      /* add comment to get comment id */
       const commentId = 'comment-123';
       await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: userId });
 
-      // Action
       const response = await server.inject({
         method: 'POST',
         url: `/threads/${threadId}/comments/${commentId}/replies`,
@@ -118,7 +101,6 @@ describe('Replies endpoints', () => {
         },
       });
 
-      // Assert
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(400);
       expect(responseJson.status).toEqual('fail');
@@ -126,16 +108,13 @@ describe('Replies endpoints', () => {
     });
 
     it('should response 404 when thread not found', async () => {
-      // Arrange
       const requestPayload = {
         content: 'content',
       };
       const server = await createServer(container);
 
-      /* add user to get access token */
       const { accessToken } = await ServerTestHelper.getCredential({ server });
 
-      // Action
       const response = await server.inject({
         method: 'POST',
         url: '/threads/thread-123/comments/comment-123/replies',
@@ -145,7 +124,6 @@ describe('Replies endpoints', () => {
         },
       });
 
-      // Assert
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(404);
       expect(responseJson.status).toEqual('fail');
@@ -155,25 +133,19 @@ describe('Replies endpoints', () => {
 
   describe('when DELETE /threads/{threadId}/comments/{commentId}/replies/{replyId}', () => {
     it('should response 200 and delete reply', async () => {
-      // Arrange
       const server = await createServer(container);
 
-      /* add user to get access token */
       const { accessToken, userId } = await ServerTestHelper.getCredential({ server });
 
-      /* add thread to get thread id */
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
 
-      /* add comment to get comment id */
       const commentId = 'comment-123';
       await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: userId });
 
-      /* add reply to get reply id */
       const replyId = 'reply-123';
       await RepliesTableTestHelper.addReply({ id: replyId, owner: userId, commentId });
 
-      // Action
       const response = await server.inject({
         method: 'DELETE',
         url: `/threads/${threadId}/comments/${commentId}/replies/${replyId}`,
@@ -182,28 +154,22 @@ describe('Replies endpoints', () => {
         },
       });
 
-      // Assert
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(200);
       expect(responseJson.status).toEqual('success');
     });
 
     it('should response 404 when reply not found', async () => {
-      // Arrange
       const server = await createServer(container);
 
-      /* add user to get access token */
       const { accessToken, userId } = await ServerTestHelper.getCredential({ server });
 
-      /* add thread to get thread id */
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: userId });
 
-      /* add comment to get comment id */
       const commentId = 'comment-123';
       await CommentsTableTestHelper.addComment({ id: commentId, threadId, owner: userId });
 
-      // Action
       const response = await server.inject({
         method: 'DELETE',
         url: `/threads/${threadId}/comments/${commentId}/replies/reply-123`,
@@ -212,7 +178,6 @@ describe('Replies endpoints', () => {
         },
       });
 
-      // Assert
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(404);
       expect(responseJson.status).toEqual('fail');
@@ -220,28 +185,21 @@ describe('Replies endpoints', () => {
     });
 
     it('should response 403 when user not the owner of the reply', async () => {
-      // Arrange
       const server = await createServer(container);
 
-      /* add first user to get access token */
-      const { accessToken: firstAccessToken, userId: firstUserId } = await ServerTestHelper.getCredential({ server, username: 'dicoding' });
+      const { userId: firstUserId } = await ServerTestHelper.getCredential({ server, username: 'dicoding' });
 
-      /* add thread to get thread id */
       const threadId = 'thread-123';
       await ThreadsTableTestHelper.addThread({ id: threadId, owner: firstUserId });
 
-      /* add comment to get comment id */
       const commentId = 'comment-123';
       await CommentsTableTestHelper.addComment({ id: commentId, owner: firstUserId, threadId });
 
-      /* add reply to get reply id */
       const replyId = 'reply-123';
       await RepliesTableTestHelper.addReply({ id: replyId, owner: firstUserId, commentId });
 
-      /* add second user to get access token */
-      const { accessToken: secondAccessToken } = await ServerTestHelper.getCredential({ server, username: 'bagusyatma' });
+      const { accessToken: secondAccessToken } = await ServerTestHelper.getCredential({ server, username: 'anggiirawan' });
 
-      // Action
       const response = await server.inject({
         method: 'DELETE',
         url: `/threads/${threadId}/comments/${commentId}/replies/${replyId}`,
@@ -250,7 +208,6 @@ describe('Replies endpoints', () => {
         },
       });
 
-      // Assert
       const responseJson = JSON.parse(response.payload);
       expect(response.statusCode).toEqual(403);
       expect(responseJson.status).toEqual('fail');

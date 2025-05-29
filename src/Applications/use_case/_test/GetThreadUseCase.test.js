@@ -8,7 +8,6 @@ const GetThreadUseCase = require('../GetThreadUseCase');
 
 describe('GetThreadUseCase', () => {
   it('should orchestrating the get thread action correctly', async () => {
-    // Arrange
     const useCaseParam = {
       threadId: 'thread-123',
     };
@@ -28,7 +27,7 @@ describe('GetThreadUseCase', () => {
         username: 'dicoding',
         date: '2021-08-08',
         content: 'content',
-        is_deleted: false,
+        isDeleted: false,
         replies: [],
       }),
     ];
@@ -40,12 +39,12 @@ describe('GetThreadUseCase', () => {
         username: 'dicoding',
         date: '2021-08-08',
         content: 'content',
-        is_deleted: false,
+        isDeleted: false,
       }),
     ];
 
-    const { is_deleted: commentIsDeleted, ...filteredCommentDetails } = expectedComments[0];
-    const { commentId: commentIdReply, is_deleted: replyIsDeleted, ...filteredReplyDetails } = expectedReplies[0];
+    const { ...filteredCommentDetails } = expectedComments[0];
+    const { ...filteredReplyDetails } = expectedReplies[0];
 
     const expectedCommentsWithReplies = [
       {
@@ -77,7 +76,7 @@ describe('GetThreadUseCase', () => {
           username: 'dicoding',
           date: '2021-08-08',
           content: 'content',
-          is_deleted: false,
+          isDeleted: false,
           replies: [],
         }),
       ]),
@@ -90,7 +89,7 @@ describe('GetThreadUseCase', () => {
           username: 'dicoding',
           date: '2021-08-08',
           content: 'content',
-          is_deleted: false,
+          isDeleted: false,
         }),
       ]),
     );
@@ -101,10 +100,8 @@ describe('GetThreadUseCase', () => {
       replyRepository: mockReplyRepository,
     });
 
-    // Action
     const thread = await getThreadUseCase.execute(useCaseParam);
 
-    // Assert
     expect(thread).toEqual(new DetailThread({ ...expectedThread, comments: expectedCommentsWithReplies }));
 
     expect(mockThreadRepository.getThreadById).toBeCalledWith(useCaseParam.threadId);
@@ -113,7 +110,6 @@ describe('GetThreadUseCase', () => {
   });
 
   it('should return thread with deleted comment and deleted reply', async () => {
-    // Arrange
     const useCaseParam = {
       threadId: 'thread-123',
     };
@@ -133,7 +129,7 @@ describe('GetThreadUseCase', () => {
         username: 'dicoding',
         date: '2021-08-08',
         content: 'content',
-        is_deleted: true,
+        isDeleted: true,
         replies: [],
       }),
     ];
@@ -145,12 +141,12 @@ describe('GetThreadUseCase', () => {
         username: 'dicoding',
         date: '2021-08-08',
         content: 'content',
-        is_deleted: true,
+        isDeleted: true,
       }),
     ];
 
-    const { is_deleted: commentIsDeleted, ...filteredCommentDetails } = expectedComments[0];
-    const { commentId: commentIdReply, is_deleted: replyIsDeleted, ...filteredReplyDetails } = expectedReplies[0];
+    const { isDeleted: commentIsDeleted, ...filteredCommentDetails } = expectedComments[0];
+    const { isDeleted: replyIsDeleted, ...filteredReplyDetails } = expectedReplies[0];
 
     const expectedCommentsWithReplies = [
       {
@@ -176,6 +172,7 @@ describe('GetThreadUseCase', () => {
         }),
       ),
     );
+
     mockCommentRepository.getCommentsByThreadId = jest.fn().mockImplementation(() =>
       Promise.resolve([
         new DetailComment({
@@ -183,11 +180,12 @@ describe('GetThreadUseCase', () => {
           username: 'dicoding',
           date: '2021-08-08',
           content: 'content',
-          is_deleted: true,
+          isDeleted: true,
           replies: [],
         }),
       ]),
     );
+
     mockReplyRepository.getRepliesByThreadId = jest.fn().mockImplementation(() =>
       Promise.resolve([
         new DetailReply({
@@ -196,7 +194,7 @@ describe('GetThreadUseCase', () => {
           username: 'dicoding',
           date: '2021-08-08',
           content: 'content',
-          is_deleted: true,
+          isDeleted: true,
         }),
       ]),
     );
@@ -207,10 +205,8 @@ describe('GetThreadUseCase', () => {
       replyRepository: mockReplyRepository,
     });
 
-    // Action
     const thread = await getThreadUseCase.execute(useCaseParam);
 
-    // Assert
     expect(thread).toEqual(new DetailThread({ ...expectedThread, comments: expectedCommentsWithReplies }));
 
     expect(mockThreadRepository.getThreadById).toBeCalledWith(useCaseParam.threadId);

@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 const ServerTestHelper = {
   async getCredential({ server, username = 'dicoding' }) {
     const userPayload = {
@@ -27,4 +26,5 @@ const ServerTestHelper = {
     };
   },
 };
+
 module.exports = ServerTestHelper;

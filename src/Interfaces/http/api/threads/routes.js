@@ -4,7 +4,7 @@ const routes = (handler) => [
     path: '/threads',
     handler: (request, h) => handler.postThreadHandler(request, h),
     options: {
-      auth: 'forumapi_jwt',
+      auth: 'forum_api_jwt',
     },
   },
   {

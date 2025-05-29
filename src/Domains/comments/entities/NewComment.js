@@ -9,13 +9,11 @@ class NewComment {
   }
 
   _verifyPayload(payload) {
-    if (this._isPayloadNotContainNeededProperty(payload)) {
+    if (this._isPayloadNotContainNeededProperty(payload))
       throw new Error('NEW_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY');
-    }
 
-    if (this._isPayloadNotMeetDataTypeSpecification(payload)) {
+    if (this._isPayloadNotMeetDataTypeSpecification(payload))
       throw new Error('NEW_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
-    }
   }
 
   _isPayloadNotContainNeededProperty({ threadId, content, owner }) {
@@ -26,4 +24,5 @@ class NewComment {
     return typeof threadId !== 'string' || typeof content !== 'string' || typeof owner !== 'string';
   }
 }
+
 module.exports = NewComment;

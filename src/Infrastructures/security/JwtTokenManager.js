@@ -1,5 +1,4 @@
 const AuthenticationTokenManager = require('../../Applications/security/AuthenticationTokenManager');
-const AuthenticationError = require('../../Commons/exceptions/AuthenticationError');
 const InvariantError = require('../../Commons/exceptions/InvariantError');
 
 class JwtTokenManager extends AuthenticationTokenManager {
@@ -20,7 +19,7 @@ class JwtTokenManager extends AuthenticationTokenManager {
     try {
       const artifacts = this._jwt.decode(token);
       this._jwt.verify(artifacts, process.env.REFRESH_TOKEN_KEY);
-    } catch (error) {
+    } catch {
       throw new InvariantError('refresh token tidak valid');
     }
   }

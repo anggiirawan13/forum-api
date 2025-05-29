@@ -5,7 +5,6 @@ const AddThreadUseCase = require('../AddThreadUseCase');
 
 describe('AddThreadUseCase', () => {
   it('should orchestrating the add thread action correctly', async () => {
-    // Arrange
     const useCasePayload = {
       title: 'title',
       body: 'body',
@@ -19,27 +18,20 @@ describe('AddThreadUseCase', () => {
       owner: 'user-123',
     });
 
-    /** creating dependency of use case */
     const mockThreadRepository = new ThreadRepository();
 
-    /** mocking needed function */
-    mockThreadRepository.addThread = jest.fn().mockImplementation(() =>
-      Promise.resolve(
-        new AddedThread({
-          id: 'thread-123',
-          title: 'title',
-          owner: 'user-123',
-        }),
-      ),
-    );
+    mockThreadRepository.addThread = jest.fn(() => Promise.resolve(
+      new AddedThread({
+        id: 'thread-123',
+        title: 'title',
+        owner: 'user-123',
+      }),
+    ));
 
-    /** creating use case instance */
     const addThreadUseCase = new AddThreadUseCase({ threadRepository: mockThreadRepository });
 
-    // Action
     const addedThread = await addThreadUseCase.execute(useCasePayload, owner);
 
-    // Assert
     expect(mockThreadRepository.addThread).toBeCalledWith(
       new NewThread({
         title: useCasePayload.title,
